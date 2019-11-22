@@ -1,5 +1,7 @@
+package corevision;
+
 import java.util.Map;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,7 +12,7 @@ public class DirectedGraph{
     private Map<Node, List<Node>> dirgraph = null;
 
     DirectedGraph(){
-        dirgraph = new HashMap<Node, List<Node>>();
+        dirgraph = new LinkedHashMap<Node, List<Node>>();
     }
 
     public void add_node(String id){
@@ -73,6 +75,7 @@ public class DirectedGraph{
     /******* I don't see better idea in this moment
     this loop takes O(n^2) in the worst case 
     */
+    //return all linked nodes' values from a certain value
     public ArrayList<String> get_list_values(String from_value){
         ArrayList<String> list_values = new ArrayList<String>();
         Set<Node> kset = dirgraph.keySet();
@@ -87,6 +90,7 @@ public class DirectedGraph{
         return list_values;
     }
 
+    //return all linked nodes' types from a certain type
     public ArrayList<String> get_list_types(String from_type){
         ArrayList<String> list_types = new ArrayList<String>();
         Set<Node> kset = dirgraph.keySet();
@@ -115,6 +119,73 @@ public class DirectedGraph{
         }
         return list_ids;
     }
+
+    public ArrayList<String> get_list_values_from_id(String from_id){
+        ArrayList<String> list_ids = new ArrayList<String>();
+        Set<Node> kset = dirgraph.keySet();
+        for(Node n : kset){
+            if(n.get_id().equals(from_id)){
+                for(Node ln : dirgraph.get(n)){
+                    list_ids.add(ln.get_value());
+                }
+                break;
+            }
+        }
+        return list_ids;
+    }
+
+    public ArrayList<String> get_list_types_from_id(String from_id){
+        ArrayList<String> list_ids = new ArrayList<String>();
+        Set<Node> kset = dirgraph.keySet();
+        for(Node n : kset){
+            if(n.get_id().equals(from_id)){
+                for(Node ln : dirgraph.get(n)){
+                    list_ids.add(ln.get_type());
+                }
+                break;
+            }
+        }
+        return list_ids;
+    }
+
+    public ArrayList<String> get_list_ids_from_type_value(String from_type, String from_value){
+        ArrayList<String> list_ids = new ArrayList<String>();
+        Set<Node> kset = dirgraph.keySet();
+        for(Node n : kset){
+            if(n.get_type().equals(from_type) && n.get_value().equals(from_value)){
+                for(Node ln : dirgraph.get(n)){
+                    list_ids.add(ln.get_id());
+                }
+                break;
+            }
+        }
+        return list_ids;
+    }
+
+    public String get_type_from_id(String from_id){
+        Set<Node> kset = dirgraph.keySet();
+        String _type = "";
+        for(Node n : kset){
+            if(n.get_id().equals(from_id)){
+                _type = n.get_type();
+                break;
+            }
+        }
+        return _type;
+    }
+
+    public String get_value_from_id(String from_id){
+        Set<Node> kset = dirgraph.keySet();
+        String _value = "";
+        for(Node n : kset){
+            if(n.get_id().equals(from_id)){
+                _value = n.get_value();
+                break;
+            }
+        }
+        return _value;
+    }
+
 
     public Map<Node, List<Node>> get_dirgraph(){
         return dirgraph;
