@@ -29,6 +29,7 @@ public class DirectedGraph{
     } 
 
     public void remove_node(String id){
+        if(from_id == null || to_id == null) throw new NullPointerException(" 'fromid'  or 'toid' are null. Check graph settings file.");
         Node node = new NodeBuilder().set_id(id).build();
         dirgraph.values().stream().forEach(e->e.remove(node));
         dirgraph.remove(node);
@@ -50,6 +51,7 @@ public class DirectedGraph{
     }*/
 
     public void add_edge(String from_id, String to_id){
+        if(from_value == null) throw new NullPointerException(" value is null. Check graph settings file.");
         Node n_from = null; // new NodeBuilder().set_id(from_id).build();
         Node n_to = null; //new NodeBuilder().set_id(to_id).build();
         Set<Node> kset = dirgraph.keySet();
@@ -67,6 +69,7 @@ public class DirectedGraph{
     }
 
     public void remove_edge(String from_id, String to_id){
+        if(from_id == null || to_id == null) throw new NullPointerException(" 'fromid'  or 'toid' are null. Check graph settings file.");
         Node n_from = new NodeBuilder().set_id(from_id).build();
         Node n_to = new NodeBuilder().set_id(to_id).build();
         dirgraph.get(n_from).remove(n_to);
@@ -77,6 +80,7 @@ public class DirectedGraph{
     */
     //return all linked nodes' values from a certain value
     public ArrayList<String> get_list_values(String from_value){
+        if(from_value == null) throw new NullPointerException(" value is null. Check graph settings file.");
         ArrayList<String> list_values = new ArrayList<String>();
         Set<Node> kset = dirgraph.keySet();
 
@@ -92,6 +96,7 @@ public class DirectedGraph{
 
     //return all linked nodes' types from a certain type
     public ArrayList<String> get_list_types(String from_type){
+        if(from_type == null) throw new NullPointerException(" type is null. Check graph settings file.");
         ArrayList<String> list_types = new ArrayList<String>();
         Set<Node> kset = dirgraph.keySet();
         for(Node n : kset){
@@ -107,6 +112,7 @@ public class DirectedGraph{
     // id could be more fast because there is just one id for every node. 
     // worst case O(2n) ~ O(n)
     public ArrayList<String> get_list_ids(String from_id){
+        if(from_id == null) throw new NullPointerException(" id is null. Check graph settings file.");
         ArrayList<String> list_ids = new ArrayList<String>();
         Set<Node> kset = dirgraph.keySet();
         for(Node n : kset){
@@ -121,6 +127,7 @@ public class DirectedGraph{
     }
 
     public ArrayList<String> get_list_values_from_id(String from_id){
+        if(from_id == null) throw new NullPointerException(" id is null. Check graph settings file.");
         ArrayList<String> list_ids = new ArrayList<String>();
         Set<Node> kset = dirgraph.keySet();
         for(Node n : kset){
@@ -135,6 +142,7 @@ public class DirectedGraph{
     }
 
     public ArrayList<String> get_list_types_from_id(String from_id){
+        if(from_id == null) throw new NullPointerException(" id is null. Check graph settings file.");
         ArrayList<String> list_ids = new ArrayList<String>();
         Set<Node> kset = dirgraph.keySet();
         for(Node n : kset){
@@ -149,6 +157,7 @@ public class DirectedGraph{
     }
 
     public ArrayList<String> get_list_ids_from_type_value(String from_type, String from_value){
+        if(from_type == null || from_value == null) throw new NullPointerException(" value or type are null. Check graph settings file.");
         ArrayList<String> list_ids = new ArrayList<String>();
         Set<Node> kset = dirgraph.keySet();
         for(Node n : kset){
@@ -163,6 +172,7 @@ public class DirectedGraph{
     }
 
     public String get_type_from_id(String from_id){
+        if(from_id == null) throw new NullPointerException(" id is null. Check graph settings file.");
         Set<Node> kset = dirgraph.keySet();
         String _type = "";
         for(Node n : kset){
@@ -175,6 +185,7 @@ public class DirectedGraph{
     }
 
     public String get_value_from_id(String from_id){
+        if(from_id == null) throw new NullPointerException(" id is null. Check graph settings file.");
         Set<Node> kset = dirgraph.keySet();
         String _value = "";
         for(Node n : kset){
